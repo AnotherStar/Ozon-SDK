@@ -1,0 +1,23 @@
+{
+    "compilerOptions": {
+        "allowSyntheticDefaultImports": true,
+        "baseUrl": ".",
+        "declaration": true,
+        "emitDecoratorMetadata": true,
+        "esModuleInterop": true,
+        "experimentalDecorators": true,
+        "importHelpers": true,
+        "module": "esnext",
+        "moduleResolution": "node",
+        "noImplicitAny": false,
+        "outDir": "dist",
+        "removeComments": false,
+        "resolveJsonModule": true,
+        "sourceMap": true,
+        "strict": true,
+        "target": "es2017",
+        "typeRoots": ["src"]
+    },
+    "include": ["src/**/*.ts", "index.d.ts"],
+    "exclude": ["--*"]
+}

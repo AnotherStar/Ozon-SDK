@@ -1,0 +1,31 @@
+{
+    "name": "ozon-sdk",
+    "version": "0.1.0",
+    "description": "Библиотека для работы с API Ozon.ru, написанная на TypeScript.",
+    "main": "index.js",
+    "type": "module",
+    "scripts": {
+        "demo": "nodemon -r dotenv/config dist/demo.js"
+    },
+    "types": "dist/types",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/AnotherStar/Ozon-SDK.git"
+    },
+    "author": "AnotherStar",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/AnotherStar/Ozon-SDK/issues"
+    },
+    "homepage": "https://github.com/AnotherStar/Ozon-SDK#readme",
+    "dependencies": {
+        "axios": "^0.21.1"
+    },
+    "devDependencies": {
+        "@types/axios": "^0.14.0",
+        "@types/dotenv": "^8.2.0",
+        "@types/node": "^16.7.6",
+        "dotenv": "^10.0.0",
+        "tslib": "^2.3.1"
+    }
+}

@@ -1,7 +1,3 @@
-type Datetime = string;
-
-type CancelReasonId = 1;
-
 declare namespace NodeJS {
     interface ProcessEnv {
         OZON_CLIENT_ID: string;
@@ -9,7 +5,71 @@ declare namespace NodeJS {
     }
 }
 
-declare namespace Ozon {
+export declare namespace OzonTypes {
+    type Language = 'RU' | 'EN';
+
+    type CancelReasonId = 1;
+
+    type Datetime = string;
+
+    type ProductVisibility =
+        /** все товары. */
+        | 'ALL'
+        /** видны покупателям. */
+        | 'VISIBLE'
+        /** не видны покупателям. */
+        | 'INVISIBLE'
+        /** нет в наличии. */
+        | 'EMPTY_STOCK'
+        /** не прошли модерацию. */
+        | 'NOT_MODERATED'
+        /** прошли модерацию. */
+        | 'MODERATED'
+        /** отключены. */
+        | 'DISABLED'
+        /** создание завершилось ошибкой. */
+        | 'STATE_FAILED'
+        /** готовы к поставке. */
+        | 'READY_TO_SUPPLY'
+        /** проходят проверку. */
+        | 'VALIDATION_STATE_PENDING'
+        /** не прошли проверку. */
+        | 'VALIDATION_STATE_FAIL'
+        /** прошли проверку. */
+        | 'VALIDATION_STATE_SUCCESS'
+        /** готовы к продаже. */
+        | 'TO_SUPPLY'
+        /** в продаже. */
+        | 'IN_SALE'
+        /** скрыты от покупателей. */
+        | 'REMOVED_FROM_SALE'
+        /** заблокированные. */
+        | 'BANNED'
+        /** цена выше рыночных. */
+        | 'OVERPRICED'
+        /** цена значительно выше рыночных. */
+        | 'CRITICALLY_OVERPRICED'
+        /** без штрихкода. */
+        | 'EMPTY_BARCODE'
+        /** со штрихкодом. */
+        | 'BARCODE_EXISTS'
+        /** на карантине. */
+        | 'QUARANTINE';
+
+    type TransactionType =
+        /** все */
+        | 'ALL'
+        /** заказы */
+        | 'ORDERS'
+        /** возвраты */
+        | 'RETURNS'
+        /** сервисные сборы */
+        | 'SERVICES'
+        /** депозит */
+        | 'DEPOSIT'
+        /** другие */
+        | 'OTHER';
+
     interface PostingAnalyticsData {
         region: string;
         city: string;
@@ -217,6 +277,44 @@ declare namespace Ozon {
 
         interface PostingFbo {
             result: Posting;
+        }
+    }
+
+    namespace Report {
+        type Type =
+            /**  Все отчёты */
+            | 'ALL'
+            /**  Отчёт по товарам */
+            | 'SELLER_PRODUCTS'
+            /**  Отчёт по транзакциям */
+            | 'SELLER_TRANSACTIONS'
+            /**  Отчёт по ценам товаров */
+            | 'SELLER_PRODUCT_PRICES'
+            /**  Отчёт об остатках товаров */
+            | 'SELLER_STOCK'
+            /**  Отчёт о перемещении товаров */
+            | 'SELLER_PRODUCT_MOVEMENT'
+            /**  Отчёт о возвратах */
+            | 'SELLER_RETURNS'
+            /**  Отчёт об отправлениях */
+            | 'SELLER_POSTINGS'
+            /**  Отчёт о финансах */
+            | 'SELLER_FINANCE';
+
+        type Status = 'success';
+
+        interface Info {
+            code: string;
+            status: Status;
+            error: string;
+            file: string;
+            report_type: Type;
+            params: {
+                delivery_schema?: string;
+                processed_at_from?: Datetime;
+                processed_at_to?: Datetime;
+            };
+            created_at: Datetime;
         }
     }
 }

@@ -7,7 +7,7 @@
     "scripts": {
         "demo": "nodemon -r dotenv/config dist/demo.js"
     },
-    "types": "dist/types",
+    "types": "src/index.d.ts",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/AnotherStar/Ozon-SDK.git"
@@ -19,7 +19,8 @@
     },
     "homepage": "https://github.com/AnotherStar/Ozon-SDK#readme",
     "dependencies": {
-        "axios": "^0.21.1"
+        "axios": "^0.21.1",
+        "xlsx": "^0.17.1"
     },
     "devDependencies": {
         "@types/axios": "^0.14.0",

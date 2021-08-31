@@ -1,3 +1,5 @@
+export {};
+
 declare namespace NodeJS {
     interface ProcessEnv {
         OZON_CLIENT_ID: string;

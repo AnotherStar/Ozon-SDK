@@ -14,7 +14,7 @@ import {
     createReportPostings,
     createReportFinance,
 } from './reports.js';
-import { OzonTypes } from './types.js';
+import { OzonTypes } from './index.d.js';
 
 export interface OzonSettings {
     baseURL?: string;

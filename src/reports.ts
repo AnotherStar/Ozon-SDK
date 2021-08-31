@@ -1,4 +1,5 @@
 import Ozon from './index.js';
+import { OzonTypes } from './index.d.js';
 
 interface CreateReportResponse {
     result: {

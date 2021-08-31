@@ -16,6 +16,8 @@ import {
     createReportFinance,
 } from './reports.js';
 
+import { getPosting, getPostingsList, getPostingsBetweenDates } from './posting.js';
+
 interface OzonSettings {
     baseURL?: string;
 }
@@ -24,7 +26,7 @@ export class Ozon {
     #apiKey: string;
     #clientId: string;
     instance: AxiosInstance;
-    baseURL: string = 'https://api-seller.ozonTypes.ru';
+    baseURL: string = 'https://api-seller.ozon.ru';
 
     getReportInfo = getReportInfo;
     getReportContent = getReportContent;
@@ -38,6 +40,10 @@ export class Ozon {
     createReportPostings = createReportPostings;
     createReportFinance = createReportFinance;
 
+    getPosting = getPosting;
+    getPostingsList = getPostingsList;
+    getPostingsBetweenDates = getPostingsBetweenDates;
+
     constructor(clientId: string, apiKey: string, settings?: OzonSettings) {
         this.#apiKey = apiKey;
         this.#clientId = clientId;
@@ -46,16 +52,6 @@ export class Ozon {
             apiKey: this.#apiKey,
             clientId: this.#clientId,
         });
-    }
-
-    getDocs() {
-        return this.instance.post('/docs').then(response => response.data);
-    }
-
-    getPostingFboList(settings: OzonTypes.Request.PostingFboList) {
-        return this.instance
-            .post<OzonTypes.Response.PostingFboList>(`/v2/posting/fbo/list`, settings)
-            .then(response => response.data.result);
     }
 
     getPostingFbo(

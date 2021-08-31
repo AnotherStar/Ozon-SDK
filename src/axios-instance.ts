@@ -14,8 +14,7 @@ export default (settings: { baseURL: string; apiKey: string; clientId: string })
     instance.interceptors.response.use(
         response => response,
         error => {
-            // console.log(error);
-            throw error && error.response && error.response.data;
+            throw (error && error.response && error.response.data) || error.code;
         },
     );
 

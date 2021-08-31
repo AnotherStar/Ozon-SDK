@@ -7,7 +7,7 @@
         "esModuleInterop": true,
         "experimentalDecorators": true,
         "importHelpers": true,
-        "module": "esnext",
+        "module": "ES6",
         "moduleResolution": "node",
         "noImplicitAny": false,
         "outDir": "dist",
@@ -15,9 +15,9 @@
         "resolveJsonModule": true,
         "sourceMap": true,
         "strict": true,
-        "target": "es2017"
-        // "typeRoots": ["src"]
+        "target": "ES6",
+        "typeRoots": ["src"]
     },
-    "include": ["src/**/*.ts", "src/index.d.ts"],
+    "include": ["src/**/*.ts", "index.d.ts"],
     "exclude": ["--*"]
 }

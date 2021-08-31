@@ -11,6 +11,13 @@ if (!OZON_API_KEY) throw 'OZON_API_KEY not provided';
 const ozon = new Ozon(OZON_CLIENT_ID, OZON_API_KEY);
 
 try {
+    ozon.getPostingsBetweenDates('2021-01-01T00:00:00.00Z', '2021-06-01T00:00:00.00Z')
+        .then(data => {
+            console.log(data);
+        })
+        .catch(error => {
+            console.log(error);
+        });
     /* ok
     
     await ozon.getReportFile('returns', {});
@@ -36,15 +43,15 @@ try {
     ozon.getReportFile('products/prices', {});
 
     */
-    const code = await ozon.createReportFinance({
-        date_from: '',
-        date_to: '',
-        language: 'RU',
-    });
+    // const code = await ozon.createReportFinance({
+    //     date_from: '',
+    //     date_to: '',
+    //     language: 'RU',
+    // });
 
     // ozon.createReportPostings()
 
-    console.log(code);
+    // console.log(code);
 } catch (error) {
     console.log(error);
 }

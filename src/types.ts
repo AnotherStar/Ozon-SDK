@@ -1,11 +1,13 @@
-declare namespace NodeJS {
-    interface ProcessEnv {
-        OZON_CLIENT_ID: string;
-        OZON_API_KEY: string;
-    }
-}
+// namespace NodeJS {
+//     interface ProcessEnv {
+//         OZON_CLIENT_ID: string;
+//         OZON_API_KEY: string;
+//     }
+// }
 
-export declare namespace OzonTypes {
+export {};
+
+export namespace OzonTypes {
     export type Language = 'RU' | 'EN';
 
     export type CancelReasonId = 1;
@@ -144,7 +146,7 @@ export declare namespace OzonTypes {
         name: string;
         quantity: number;
         offer_id: number;
-        price: number;
+        price: string;
         digital_codes: never[];
     }
 

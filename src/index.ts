@@ -1,4 +1,5 @@
 import { AxiosInstance } from 'axios';
+import { OzonTypes } from './types.js';
 import getInstance from './axios-instance.js';
 
 import {
@@ -14,13 +15,12 @@ import {
     createReportPostings,
     createReportFinance,
 } from './reports.js';
-import { OzonTypes } from './index.d.js';
 
-export interface OzonSettings {
+interface OzonSettings {
     baseURL?: string;
 }
 
-export default class Ozon {
+export class Ozon {
     #apiKey: string;
     #clientId: string;
     instance: AxiosInstance;

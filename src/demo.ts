@@ -1,4 +1,4 @@
-import Ozon from './index.js';
+import { Ozon } from './index.js';
 import { config } from 'dotenv';
 
 config();

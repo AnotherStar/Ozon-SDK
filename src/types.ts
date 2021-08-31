@@ -1,5 +1,3 @@
-export {};
-
 declare namespace NodeJS {
     interface ProcessEnv {
         OZON_CLIENT_ID: string;
@@ -8,13 +6,13 @@ declare namespace NodeJS {
 }
 
 export declare namespace OzonTypes {
-    type Language = 'RU' | 'EN';
+    export type Language = 'RU' | 'EN';
 
-    type CancelReasonId = 1;
+    export type CancelReasonId = 1;
 
-    type Datetime = string;
+    export type Datetime = string;
 
-    type ProductVisibility =
+    export type ProductVisibility =
         /** все товары. */
         | 'ALL'
         /** видны покупателям. */
@@ -58,7 +56,7 @@ export declare namespace OzonTypes {
         /** на карантине. */
         | 'QUARANTINE';
 
-    type TransactionType =
+    export type TransactionType =
         /** все */
         | 'ALL'
         /** заказы */
@@ -72,7 +70,7 @@ export declare namespace OzonTypes {
         /** другие */
         | 'OTHER';
 
-    interface PostingAnalyticsData {
+    export interface PostingAnalyticsData {
         region: string;
         city: string;
         delivery_type: 'PVZ';
@@ -83,7 +81,7 @@ export declare namespace OzonTypes {
         is_legal: boolean;
     }
 
-    interface PostingFinancialDataProduct {
+    export interface PostingFinancialDataProduct {
         commission_amount: number;
         commission_percent: number;
         payout: number;
@@ -111,7 +109,7 @@ export declare namespace OzonTypes {
         };
     }
 
-    interface PostingFinancialData {
+    export interface PostingFinancialData {
         products: PostingFinancialDataProduct[];
         posting_services: {
             marketplace_service_item_fulfillment: number;
@@ -128,7 +126,7 @@ export declare namespace OzonTypes {
         };
     }
 
-    type PostingStatus =
+    export type PostingStatus =
         | 'awaiting_approve'
         | 'awaiting_packaging'
         | 'awaiting_deliver'
@@ -139,9 +137,9 @@ export declare namespace OzonTypes {
         | 'not_accepted'
         | 'driver_pickup';
 
-    type SortDirection = 'asc' | 'desc';
+    export type SortDirection = 'asc' | 'desc';
 
-    interface PostingProduct {
+    export interface PostingProduct {
         sku: number;
         name: string;
         quantity: number;
@@ -150,7 +148,7 @@ export declare namespace OzonTypes {
         digital_codes: never[];
     }
 
-    interface Posting {
+    export interface Posting {
         order_id: number;
         order_number: string;
         posting_number: string;
@@ -164,13 +162,13 @@ export declare namespace OzonTypes {
         additional_data: [];
     }
 
-    namespace Request {
-        interface WithParams {
+    export namespace Request {
+        export interface WithParams {
             analytics_data?: boolean;
             financial_data?: boolean;
         }
 
-        interface PostingFboList {
+        export interface PostingFboList {
             dir?: SortDirection;
             filter?: {
                 since?: Datetime;
@@ -183,14 +181,14 @@ export declare namespace OzonTypes {
             with?: WithParams;
         }
 
-        interface PostingFbo {
+        export interface PostingFbo {
             posting_number: string;
             with?: WithParams;
         }
     }
 
-    namespace Response {
-        interface PostingFboList {
+    export namespace Response {
+        export interface PostingFboList {
             result: [
                 {
                     additional_data: [
@@ -282,8 +280,8 @@ export declare namespace OzonTypes {
         }
     }
 
-    namespace Report {
-        type Type =
+    export namespace Report {
+        export type Type =
             /**  Все отчёты */
             | 'ALL'
             /**  Отчёт по товарам */
@@ -303,9 +301,9 @@ export declare namespace OzonTypes {
             /**  Отчёт о финансах */
             | 'SELLER_FINANCE';
 
-        type Status = 'success';
+        export type Status = 'success';
 
-        interface Info {
+        export interface Info {
             code: string;
             status: Status;
             error: string;

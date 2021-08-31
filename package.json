@@ -1,8 +1,9 @@
 {
     "name": "ozon-sdk",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "Библиотека для работы с API Ozon.ru, написанная на TypeScript.",
-    "main": "index.js",
+    "main": "dist/index.js",
+    "typings": "dist/index.d.ts",
     "type": "module",
     "scripts": {
         "demo": "nodemon -r dotenv/config dist/demo.js"

@@ -18,6 +18,12 @@ import {
 
 import { getPosting, getPostingsList, getPostingsBetweenDates } from './posting.js';
 
+import {
+    //
+    getProductInfo,
+} from './product.js';
+import { getFinanceTransactions } from './finance.js';
+
 interface OzonSettings {
     baseURL?: string;
 }
@@ -43,6 +49,10 @@ export class Ozon {
     getPosting = getPosting;
     getPostingsList = getPostingsList;
     getPostingsBetweenDates = getPostingsBetweenDates;
+
+    getProductInfo = getProductInfo;
+
+    getFinanceTransactions = getFinanceTransactions;
 
     constructor(clientId: string, apiKey: string, settings?: OzonSettings) {
         this.#apiKey = apiKey;

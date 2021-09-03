@@ -145,7 +145,7 @@ export namespace OzonTypes {
         sku: number;
         name: string;
         quantity: number;
-        offer_id: number;
+        offer_id: string;
         price: string;
         digital_codes: never[];
     }
@@ -160,7 +160,7 @@ export namespace OzonTypes {
         in_process_at: Datetime;
         products: PostingProduct[];
         analytics_data: PostingAnalyticsData | null;
-        financial_data: PostingFinancialDataProduct | null;
+        financial_data: PostingFinancialData | null;
         additional_data: [];
     }
 
@@ -303,7 +303,7 @@ export namespace OzonTypes {
             /**  Отчёт о финансах */
             | 'SELLER_FINANCE';
 
-        export type Status = 'success';
+        export type Status = 'success' | 'waiting';
 
         export interface Info {
             code: string;

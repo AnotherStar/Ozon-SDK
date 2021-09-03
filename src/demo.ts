@@ -1,8 +1,8 @@
 import { Ozon } from './index.js';
 import { config } from 'dotenv';
-
 config();
 
+import { writeFileSync } from 'fs';
 const { OZON_CLIENT_ID, OZON_API_KEY } = process.env;
 
 if (!OZON_CLIENT_ID) throw 'OZON_CLIENT_ID not provided';
@@ -11,13 +11,38 @@ if (!OZON_API_KEY) throw 'OZON_API_KEY not provided';
 const ozon = new Ozon(OZON_CLIENT_ID, OZON_API_KEY);
 
 try {
-    ozon.getPostingsBetweenDates('2021-01-01T00:00:00.00Z', '2021-06-01T00:00:00.00Z')
-        .then(data => {
-            console.log(data);
-        })
-        .catch(error => {
-            console.log(error);
-        });
+    // ozon.getProductInfo({
+    //     offer_id: '104401EE',
+    // }).then(data => {
+    //     console.log(data);
+    // });
+
+    ozon.getPostingFbo('72471194-0001-1', {
+        with: {
+            financial_data: true,
+        },
+    }).then(posting => {
+        console.log(JSON.stringify(posting, null, '  '));
+    });
+
+    // ozon.getFinanceTransactions({
+    //     filter: {
+    //         posting_number: '72471194-0001-1',
+    //     },
+    //     page: 1,
+    //     page_size: 1000,
+    // }).then(data => {
+    //     console.log(data);
+    // });
+
+    // ozon.getPostingsBetweenDates('2021-08-01T00:00:00.00Z', '2021-08-02T00:00:00.00Z')
+    //     .then(data => {
+    //         console.log(data);
+    //     })
+    //     .catch(error => {
+    //         console.log(error);
+    //     });
+
     /* ok
     
     await ozon.getReportFile('returns', {});
@@ -49,7 +74,28 @@ try {
     //     language: 'RU',
     // });
 
-    // ozon.createReportPostings()
+    // ozon.createReportPostings({
+    //     // @ts-ignore
+    //     filter: {
+    //         processed_at_from: '2021-08-01T00:00:00.00Z',
+    //         processed_at_to: '2021-09-01T00:00:00.00Z',
+    //     },
+    // }).then(data => {
+    //     writeFileSync('ReportPostings', data);
+
+    //     // @ts-ignore
+    //     // console.log('stream', Object.keys(stream));
+    //     // @ts-ignore
+    //     // stream?.pipeTo(destination);
+    // });
+
+    // ozon.createReportTransactions({
+    //     date_from: '2021-07-01T00:00:00.00Z',
+    //     date_to: '2021-09-01T00:00:00.00Z',
+    // }).then(data => {
+    //     console.log('ReportTransactions data', data);
+    //     writeFileSync('ReportTransactions', data);
+    // });
 
     // console.log(code);
 } catch (error) {

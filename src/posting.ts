@@ -38,7 +38,12 @@ export function getPosting(this: Ozon, postingNumber: string, withData: OzonType
         .then(response => response.data.result);
 }
 
-export async function getPostingsBetweenDates(this: Ozon, since: OzonTypes.Datetime, to: OzonTypes.Datetime) {
+export async function getPostingsBetweenDates(
+    this: Ozon,
+    since: OzonTypes.Datetime,
+    to: OzonTypes.Datetime,
+    withData?: OzonTypes.Request.WithParams,
+) {
     let i = 10;
     const postings: OzonTypes.Posting[] = [];
     let limit = 50;
@@ -53,11 +58,11 @@ export async function getPostingsBetweenDates(this: Ozon, since: OzonTypes.Datet
             },
             limit: 50,
             offset,
+            with: withData,
         });
         postings.push(...chunk);
         offset += limit;
-        isComplete = !chunk.length;
-        console.log(chunk.length, offset);
+        isComplete = chunk.length < limit;
     }
 
     return postings;

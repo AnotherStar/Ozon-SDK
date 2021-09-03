@@ -19,16 +19,21 @@ export function getReportInfo(this: Ozon, code: string) {
 /* --------------------------------------------- ПОЛУЧИТЬ КОНТЕНТ ОТЧЕТА -------------------------------------------- */
 
 export async function getReportContent(this: Ozon, code: string, delay: number = 3000) {
+    console.log('getReportContent', code);
+
     const reportInfo = await this.getReportInfo(code);
 
-    if (reportInfo.status == 'success')
-        return this.instance
-            .get<ReadableStream>(reportInfo.file, { responseType: 'stream' })
-            .then(response => response.data);
+    // console.log('reportInfo', reportInfo.stat);
 
-    setTimeout(() => {
+    if (reportInfo.status == 'success') {
+        return this.instance.get(reportInfo.file).then(response => response.data);
+    } else {
+        console.log('wait', reportInfo.status, delay);
+
+        await new Promise(r => setTimeout(r, delay));
+
         return this.getReportContent(code, delay);
-    }, delay);
+    }
 }
 
 /* ------------------------------------------------- СПИСОК ОТЧЕТОВ ------------------------------------------------- */
@@ -43,7 +48,7 @@ export function getReportList(this: Ozon, payload: GetReportListRequest) {
     return this.instance
         .post<ReportInfoResponse>(`/v1/report/list`, payload)
         .then(response => response.data.result.code)
-        .then(this.getReportContent);
+        .then(code => this.getReportContent(code));
 }
 
 /* ------------------------------------------------ ОТЧЕТ ПО ТОВАРАМ ------------------------------------------------ */
@@ -60,7 +65,7 @@ export function createReportProducts(this: Ozon, payload: CreateReportProductsRe
     return this.instance
         .post<CreateReportResponse>(`/v1/report/products/create`, payload)
         .then(response => response.data.result.code)
-        .then(this.getReportContent);
+        .then(code => this.getReportContent(code));
 }
 
 /* ---------------------------------------------- ОТЧЁТ ПО ТРАНЗАКЦИЯМ ---------------------------------------------- */
@@ -68,16 +73,19 @@ export function createReportProducts(this: Ozon, payload: CreateReportProductsRe
 interface CreateReportTransactionsRequest {
     date_from: OzonTypes.Datetime;
     date_to: OzonTypes.Datetime;
-    language: OzonTypes.Language;
-    search: string;
-    transaction_type: OzonTypes.TransactionType;
+    language?: OzonTypes.Language;
+    search?: string;
+    transaction_type?: OzonTypes.TransactionType;
 }
 
 export function createReportTransactions(this: Ozon, payload: CreateReportTransactionsRequest) {
     return this.instance
         .post<CreateReportResponse>(`/v1/report/transactions/create`, payload)
         .then(response => response.data.result.code)
-        .then(this.getReportContent);
+        .then(code => this.getReportContent(code))
+        .catch(error => {
+            console.log(error);
+        });
 }
 
 /* ------------------------------------------------- ОТЧЁТ ПО ЦЕНАМ ------------------------------------------------- */
@@ -94,7 +102,7 @@ export function createReportProductsPrices(this: Ozon, payload: CreateReportProd
     return this.instance
         .post<CreateReportResponse>(`/v1/report/products/prices/create`, payload)
         .then(response => response.data.result.code)
-        .then(this.getReportContent);
+        .then(code => this.getReportContent(code));
 }
 
 /* ------------------------------------------------ ОТЧЕТ ОБ ОСТАТКАХ ----------------------------------------------- */
@@ -107,7 +115,7 @@ export function createReportStock(this: Ozon, payload: CreateReportStockRequest)
     return this.instance
         .post<CreateReportResponse>(`/v1/report/stock/create`, payload)
         .then(response => response.data.result.code)
-        .then(this.getReportContent);
+        .then(code => this.getReportContent(code));
 }
 
 /* ------------------------------------------- ОТЧЁТ О ПЕРЕМЕЩЕНИИ ТОВАРОВ ------------------------------------------ */
@@ -122,7 +130,7 @@ export function createReportProductsMovement(this: Ozon, payload: CreateReportPr
     return this.instance
         .post<CreateReportResponse>(`/v1/report/products/movement/create`, payload)
         .then(response => response.data.result.code)
-        .then(this.getReportContent);
+        .then(code => this.getReportContent(code));
 }
 
 /* ------------------------------------------------ ОТЧЁТ О ВОЗВРАТАХ ----------------------------------------------- */
@@ -140,7 +148,7 @@ export function createReportReturns(this: Ozon, payload: CreateReportReturnsRequ
     return this.instance
         .post<CreateReportResponse>(`/v1/report/returns/create`, payload)
         .then(response => response.data.result.code)
-        .then(this.getReportContent);
+        .then(code => this.getReportContent(code));
 }
 
 /* ---------------------------------------------- ОТЧЕТ ПО ОТПРАВЛЕНИЯМ --------------------------------------------- */
@@ -164,7 +172,7 @@ export function createReportPostings(this: Ozon, payload: CreateReportPostingsRe
     return this.instance
         .post<CreateReportResponse>(`/v1/report/postings/create`, payload)
         .then(response => response.data.result.code)
-        .then(this.getReportContent);
+        .then(code => this.getReportContent(code));
 }
 
 /* ------------------------------------------------ ОТЧЁТ О ФИНАНСАХ ------------------------------------------------ */
@@ -179,5 +187,5 @@ export function createReportFinance(this: Ozon, payload: CreateReportFinanceRequ
     return this.instance
         .post<CreateReportResponse>(`/v1/report/finance/create`, payload)
         .then(response => response.data.result.code)
-        .then(this.getReportContent);
+        .then(code => this.getReportContent(code));
 }
